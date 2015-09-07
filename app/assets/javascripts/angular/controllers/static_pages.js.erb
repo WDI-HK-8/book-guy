@@ -1,0 +1,42 @@
+app.controller('StaticPagesCtrl', ['$scope', '$http', function($scope, $http){
+
+  $scope.book = {};
+  $scope.form = {};
+
+  $scope.form.create = function(){
+    var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
+
+    var data = {
+      book: $scope.book
+    };
+
+    $http.post(url + '/books', data).success(function(response){
+      console.log(response);
+    });
+  };
+
+  $scope.apiSearch = function(keyEvent, value) {
+    if (keyEvent.which === 13) {
+      var url = 'https://isbndb.com/api/v2/json/HNUXUBXN/books?q=' + value.replace(' ', '+')
+      $http.get(url).success(function(response){
+        $scope.books = response.data
+        console.log($scope.books)
+        $scope.books.forEach(function(book){
+          var authors = ''
+          book.author_data.forEach(function(author){
+            if (authors === '') {
+              authors += author.name
+            }else {
+              authors += '; ' + author.name
+            }
+          })
+          book.author = authors
+          book.cover_image_url = 'http://covers.openlibrary.org/b/isbn/' + book.isbn13 + '.jpg'
+        });
+      });
+    }
+  }
+
+
+
+}]);

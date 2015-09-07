@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <h1> {{ message }} </h1>
+  </div>
+</div>
+
+<form>
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" placeholder="Enter title" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
+  </div>
+  <div class="form-group">
+    <label>ISBN 10</label>
+    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter isbn10" ng-model="book.isbn10">
+  </div>
+  <div class="form-group">
+    <label>ISBN 13</label>
+    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter isbn13" ng-model="book.isbn13">
+  </div>
+  <div class="form-group">
+    <label>Pick your book</label>
+    <select ng-model="book" ng-options="book.title + ' --' + book.publisher_name for book in books"> </select>
+  </div>
+  <div class="form-group">
+    <label>Author</label>
+    <input type="text" class="form-control" placeholder="Enter author" ng-model="book.author">
+  </div>
+  <div class="form-group">
+    <label>Publisher</label>
+    <input type="text" class="form-control" placeholder="Enter publisher" ng-model="book.publisher_name">
+  </div>
+  <div class="form-group">
+    <label>Edition</label>
+    <input type="text" class="form-control" placeholder="Enter edition" ng-model="book.edition_info">
+  </div>
+  <div class="form-group">
+    <label>Cover image url</label>
+    <input type="text" class="form-control" placeholder="Enter cover image url" ng-model="book.cover_image_url">
+  </div>
+  <div class="form-group">
+    <label>Summary</label>
+    <input type="text" class="form-control" placeholder="Enter summary" ng-model="book.summary">
+  </div>
+  <button type="button" ng-click="form.create()" class="btn btn-default">Submit</button>
+</form>
