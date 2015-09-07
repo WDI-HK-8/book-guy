@@ -1,6 +1,6 @@
 app.controller('BooksCtrl', ['$scope', '$http', '$location', function($scope, $http, $location){
 
-  var url = "<%= ENV['URL'] %>" || "https://localhost:3000";
+  var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
   $http.get(url + '/books').success(function(response){
     console.log(response);
