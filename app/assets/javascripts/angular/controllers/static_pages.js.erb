@@ -17,21 +17,36 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', function($scope, $http){
 
   $scope.apiSearch = function(keyEvent, value) {
     if (keyEvent.which === 13) {
-      var url = 'https://isbndb.com/api/v2/json/HNUXUBXN/books?q=' + value.replace(' ', '+')
+      var url = 'https://www.googleapis.com/books/v1/volumes?q=' + value.replace(' ', '+')
       $http.get(url).success(function(response){
-        $scope.books = response.data
+        $scope.books = response.items
         console.log($scope.books)
+
+
         $scope.books.forEach(function(book){
-          var authors = ''
-          book.author_data.forEach(function(author){
-            if (authors === '') {
-              authors += author.name
-            }else {
-              authors += '; ' + author.name
-            }
-          })
-          book.author = authors
-          book.cover_image_url = 'http://covers.openlibrary.org/b/isbn/' + book.isbn13 + '.jpg'
+          book.publisher        = book.volumeInfo.publisher
+          book.published_date   = book.volumeInfo.publishedDate
+          book.page_count       = book.volumeInfo.pageCount
+          book.description      = book.volumeInfo.description
+          book.title            = book.volumeInfo.title
+          book.category         = book.volumeInfo.category
+          book.small_thumbnail  = book.volumeInfo.imageLinks.smallThumbnail
+          book.thumbnail        = book.volumeInfo.imageLinks.thumbnail
+          if (typeof book.volumeInfo.authors != 'undefined') {
+            book.author           = book.volumeInfo.authors.join([separator = ', '])
+          }
+          if (typeof book.volumeInfo.industryIdentifiers != 'undefined') {
+            book.volumeInfo.industryIdentifiers.forEach(function(isbn){
+              if (isbn.type === "ISBN_10") {
+                book.isbn10 = isbn.identifier
+              }else if (isbn.type === "ISBN_13") {
+                book.isbn13 = isbn.identifier
+              }
+            })
+          }
+          if (typeof book.volumeInfo.categories != 'undefined') {
+            book.category = book.volumeInfo.categories[0]
+          }
         });
       });
     }
