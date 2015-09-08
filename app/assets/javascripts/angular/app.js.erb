@@ -1,6 +1,6 @@
-var app = angular.module('book-guy', ['ngRoute']);
+var app = angular.module('book-guy', ['ngRoute', 'ng-token-auth']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$authProvider', function($routeProvider, $authProvider) {
   // Configure Angular Routes
   $routeProvider.
     when('/', {
@@ -11,4 +11,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: "<%= asset_path('static_pages/books.html') %>",
       controller: 'BooksCtrl'
     })
+
+  $authProvider.configure({
+    // By default, you only need to configure apiUrl
+    // Note that if you put a '/' at the end of the link, there will be errors when calling the api
+    apiUrl: 'http://localhost:3000'
+  })
 }]);

@@ -1,4 +1,4 @@
-app.controller('StaticPagesCtrl', ['$scope', '$http', function($scope, $http){
+app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', function($scope, $http, $auth, $location){
 
   $scope.book = {};
   $scope.form = {};
@@ -51,6 +51,21 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', function($scope, $http){
       });
     }
   }
+
+  $scope.signup = function () {
+    $auth.submitRegistration($scope.registrationForm).
+     then(function(resp) {
+       // handle success response
+       console.log(resp);
+
+       // redirect back to root when registration succesfull
+       $location.path('/');
+     }).
+     catch(function(resp) {
+       // handle error response
+       console.log(resp);
+     });
+  };
 
 
 
