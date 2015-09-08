@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 <navbar></navbar>
 
 <div class="container">
@@ -42,175 +44,34 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$24.99</h4>
-              <h4><a href="#">First Product</a>
-              </h4>
-              <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">15 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-sm-4 col-lg-4 col-md-4">
+        <div ng-repeat="item in items track by $index" class="col-sm-4 col-lg-4 col-md-4">
           <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
+            <img ng-src="{{ item.thumbnail }}" alt="">
             <div class="caption">
-              <h4 class="pull-right">$64.99</h4>
-              <h4><a href="#">Second Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">12 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$74.99</h4>
-              <h4><a href="#">Third Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">31 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$84.99</h4>
-              <h4><a href="#">Fourth Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">6 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$94.99</h4>
-              <h4><a href="#">Fifth Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">18 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$94.99</h4>
-              <h4><a href="#">Fifth Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">18 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$94.99</h4>
-              <h4><a href="#">Fifth Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">18 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 col-lg-4 col-md-4">
-          <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
-            <div class="caption">
-              <h4 class="pull-right">$94.99</h4>
-              <h4><a href="#">Fifth Product</a>
-              </h4>
-              <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="ratings">
-              <p class="pull-right">18 reviews</p>
-              <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </p>
+              <h4><a href="#">{{item.title}}</a></h4>
+              <p>by <i>{{item.author}}</i></p>
+              <div class="ratings">
+                <span>Condition: </span>
+                <span ng-repeat="Star in [1,2,3,4,5]">
+                  <span ng-switch="item.condition >= Star">
+                    <span ng-switch-when="true">
+                      <i class="fa fa-star"></i>
+                    </span>
+                    <span ng-switch-when="false">
+                      <span ng-switch="item.condition > (Star-1)">
+                        <span ng-switch-when="true">
+                          <i class="fa fa-star-half"></i>
+                        </span>
+                        <span ng-switch-when="false">
+                          <i class="fa fa-star-o"></i>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <h4 id="priceTag" class="pull-right">${{item.price}}</h4>
             </div>
           </div>
         </div>

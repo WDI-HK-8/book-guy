@@ -13,7 +13,7 @@ class CreateBooks < ActiveRecord::Migration
       t.integer  "isbn10", :limit => 8
       t.integer  "isbn13", :limit => 8
       t.decimal  "price"
-      t.integer  "condition"
+      t.decimal  "condition"
       t.text     "notes"
       t.timestamps null: false
     end
