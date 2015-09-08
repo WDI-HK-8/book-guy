@@ -1,4 +1,10 @@
 app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', function($scope, $http, $auth, $location){
 
+  var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
+
+  $http.get(url + '/books').success(function(response){
+    console.log(response);
+    $scope.items = response;
+  });
 
 }]);
