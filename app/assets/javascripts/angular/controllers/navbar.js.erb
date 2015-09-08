@@ -1,4 +1,29 @@
-app.controller('NavbarCtrl', ['$scope', '$auth', '$location', function($scope, $auth, $location){
-  $scope.message = 'DIRECTIVE TEST'
+app.controller('NavbarCtrl', ['$scope', '$auth', '$location', '$route', function($scope, $auth, $location, $route){
+  $scope.authData = $auth.validateUser();
+  console.log($scope.authData)
+  if ($scope.authData.$$state.status == 1) {
+    $scope.authenticated = true
+    console.log($scope.authData.$$state.value.name)
+  }
 
+  $scope.login = function () {
+    $auth.submitLogin($scope.loginForm).
+     then(function(resp) {
+       console.log(resp);
+       $route.reload();
+     }).
+     catch(function(resp) {
+       // handle error response
+       console.log(resp);
+     });
+  };
+
+  $scope.logout = function () {
+     $auth.signOut().then(function(resp) {
+       console.log(resp);
+       $route.reload();
+     }).catch(function(resp) {
+       console.log(resp);
+     });
+   };
 }]);
