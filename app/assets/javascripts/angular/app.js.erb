@@ -7,9 +7,9 @@ app.config(['$routeProvider', '$authProvider', function($routeProvider, $authPro
       templateUrl: "<%= asset_path('static_pages/index.html') %>",
       controller: 'StaticPagesCtrl'
     }).
-    when('/books', {
-      templateUrl: "<%= asset_path('static_pages/books.html') %>",
-      controller: 'BooksCtrl'
+    when('/mybooks', {
+      templateUrl: "<%= asset_path('static_pages/mybooks.html') %>",
+      controller: 'MyBooksCtrl'
     })
 
   $authProvider.configure({
