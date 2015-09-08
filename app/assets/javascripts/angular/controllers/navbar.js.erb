@@ -4,6 +4,8 @@ app.controller('NavbarCtrl', ['$scope', '$auth', '$location', '$route', function
   if ($scope.authData.$$state.status == 1) {
     $scope.authenticated = true
     console.log($scope.authData.$$state.value.name)
+  }else {
+    $location.path('/')
   }
 
   $scope.login = function () {
