@@ -17,4 +17,5 @@
 //= require angular-cookie/angular-cookie
 //= require jquery/dist/jquery.min.js
 // = require bootstrap/dist/js/bootstrap.min.js
+// = require angular-bootstrap/ui-bootstrap-tpls.min.js
 //= require_tree .
