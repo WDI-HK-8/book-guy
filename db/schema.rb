@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908061931) do
+ActiveRecord::Schema.define(version: 20150909043132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20150908061931) do
   end
 
   add_index "books", ["user_id"], name: "index_books_on_user_id", using: :btree
+
+  create_table "requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "book_id"
+  end
+
+  add_index "requests", ["book_id"], name: "index_requests_on_book_id", using: :btree
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -68,4 +78,6 @@ ActiveRecord::Schema.define(version: 20150908061931) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "books", "users"
+  add_foreign_key "requests", "books"
+  add_foreign_key "requests", "users"
 end
