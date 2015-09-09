@@ -5,7 +5,7 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
-  def home
+  def index_my_books
     @books = current_user.books.all
   end
 

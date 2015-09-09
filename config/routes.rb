@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   resources :books
 
-  get 'mybooks',  to: 'books#home'
+  get 'mybooks',  to: 'books#index_my_books'
 end
