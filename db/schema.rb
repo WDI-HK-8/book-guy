@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150908061931) do
     t.integer  "isbn10",          limit: 8
     t.integer  "isbn13",          limit: 8
     t.decimal  "price"
-    t.integer  "condition"
+    t.decimal  "condition"
     t.text     "notes"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

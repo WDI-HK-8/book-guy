@@ -1,108 +1,174 @@
-<h1>Add new book</h1>
-<form>
-  <div class="form-group">
-    <label>Title</label>
-    <input type="text" class="form-control" placeholder="Enter title" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
-  </div>
-  <div class="form-group">
-    <label>ISBN 10</label>
-    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter isbn10" ng-model="book.isbn10">
-  </div>
-  <div class="form-group">
-    <label>ISBN 13</label>
-    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter isbn13" ng-model="book.isbn13">
-  </div>
-  <div class="form-group">
-    <label>Pick your book</label>
-    <select ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
-  </div>
-  <div class="form-group">
-    <label>Author</label>
-    <input type="text" class="form-control" placeholder="Enter author" ng-model="book.author">
-  </div>
-  <div class="form-group">
-    <label>Publisher</label>
-    <input type="text" class="form-control" placeholder="Enter publisher" ng-model="book.publisher">
-  </div>
-  <div class="form-group">
-    <label>Category</label>
-    <input type="text" class="form-control" placeholder="Enter category" ng-model="book.category">
-  </div>
-  <div class="form-group">
-    <label>Published date</label>
-    <input type="text" class="form-control" placeholder="Enter published date" ng-model="book.published_date">
-  </div>
-  <div class="form-group">
-    <label>Small thumbnail</label>
-    <input type="text" class="form-control" placeholder="Enter small thumbnail" ng-model="book.small_thumbnail">
-  </div>
-  <div class="form-group">
-    <label>Thumbnail</label>
-    <input type="text" class="form-control" placeholder="Enter thumbnail" ng-model="book.thumbnail">
-  </div>
-  <div class="form-group">
-    <label>Description</label>
-    <input type="text" class="form-control" placeholder="Enter description" ng-model="book.description">
-  </div>
-  <div class="form-group">
-    <label>Page count</label>
-    <input type="text" class="form-control" placeholder="Enter page count" ng-model="book.page_count">
-  </div>
-  <div class="form-group">
-    <label>Price</label>
-    <input type="text" class="form-control" placeholder="Enter price" ng-model="book.price">
-  </div>
-  <div class="form-group">
-    <label>Condition</label>
-    <input type="text" class="form-control" placeholder="Enter condition" ng-model="book.condition">
-  </div>
-  <div class="form-group">
-    <label>Notes</label>
-    <input type="text" class="form-control" placeholder="Enter notes" ng-model="book.notes">
-  </div>
-  <button type="button" ng-click="form.create()" class="btn btn-default">Submit</button>
-</form>
+
+<navbar></navbar>
 
 <div class="container">
   <div class="row">
-    <h1>Sign Up</h1>
-    <form ng-submit="signup()" role="form" ng-init="registrationForm = {}">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="email" ng-model="registrationForm.email" required="required" class="form-control" placeholder="Enter Email"/>
+    <div class="col-md-3">
+      <p class="lead">Pick a category</p>
+      <div class="list-group">
+        <a href="#" class="list-group-item">Category 1</a>
+        <a href="#" class="list-group-item">Category 2</a>
+        <a href="#" class="list-group-item">Category 3</a>
       </div>
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" name="name" ng-model="registrationForm.name" required="required" class="form-control" placeholder="Enter your name"/>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row carousel-holder">
+        <div class="col-md-12">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="item active">
+                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+              </div>
+              <div class="item">
+                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+              </div>
+              <div class="item">
+                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+              </div>
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="password" ng-model="registrationForm.password" required="required" class="form-control" placeholder="Enter Password"/>
+
+      <div class="row">
+        <div ng-repeat="item in items track by $index" class="col-sm-4 col-lg-4 col-md-4">
+          <div class="thumbnail">
+            <img ng-src="{{ item.thumbnail }}" data-toggle="modal" data-target="#modal{{item.id}}" alt="">
+            <div class="caption">
+              <h4><a data-toggle="modal" data-target="#modal{{item.id}}">{{item.title}}</a></h4>
+              <div class="ratings">
+              <p>by <i>{{item.author}}</i></p>
+                <span>Condition: </span>
+                <span ng-repeat="Star in [1,2,3,4,5]">
+                  <span ng-switch="item.condition >= Star">
+                    <span ng-switch-when="true">
+                      <i class="fa fa-star"></i>
+                    </span>
+                    <span ng-switch-when="false">
+                      <span ng-switch="item.condition > (Star-1)">
+                        <span ng-switch-when="true">
+                          <i class="fa fa-star-half"></i>
+                        </span>
+                        <span ng-switch-when="false">
+                          <i class="fa fa-star-o"></i>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <h4 id="priceTag" class="pull-right">${{item.price}}</h4>
+            </div>
+          </div>
+
+          <div class="modal" id="modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="{{item.id}}Label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="text-danger fa fa-times"></i></button>
+                  <h4 class="modal-title" id="{{item.id}}Label"><i class="text-muted fa fa-shopping-cart"></i> <b> {{item.title}}</b></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="pull-left col-md-8 ">
+                    <tbody class="bookTableBody">
+                      <tr>
+                        <td><strong>Author</strong></td>
+                        <td> </td>
+                        <td>{{ item.author }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Category</strong></td>
+                        <td> </td>
+                        <td>{{ item.category }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Publisher</strong></td>
+                        <td> </td>
+                        <td>{{ item.publisher }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Published date</strong></td>
+                        <td> </td>
+                        <td>{{ item.published_date }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Page count</strong></td>
+                        <td> </td>
+                        <td>{{ item.page_count }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>ISBN 10</strong></td>
+                        <td> </td>
+                        <td>{{ item.isbn10 }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>ISBN 13</strong></td>
+                        <td> </td>
+                        <td>{{ item.isbn13 }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Notes from seller</strong></td>
+                        <td> </td>
+                        <td>{{ item.notes }}</td>
+                      </tr>
+                      <tr>
+                        <td id="showDescriptionButton" ng-hide="description" ng-click="showDescription()" class="btn-mais-info text-primary">
+                          <i class="fa fa-plus-square-o"></i> Show description
+                        </td>
+                        <td id="hideDescriptionButton" ng-show="description" ng-click="hideDescription()" class="btn-mais-info text-primary">
+                          <i class="fa fa-minus-square-o"></i> Hide description
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                  <div class="col-md-4">
+                    <img ng-src="{{ item.thumbnail }}" alt="teste" class="img-thumbnail">
+                  </div>
+
+                  <div class="clearfix"></div>
+                  <p ng-show="description" id="itemDescription">{{item.description}}</p>
+                </div>
+
+                <div class="modal-footer">
+                  <div class="text-right pull-right col-md-3">
+                    <span class="h3 text-muted"><strong>${{item.price}}</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>password Confirmation</label>
-        <input type="password" name="password_confirmation" ng-model="registrationForm.password_confirmation" required="required" class="form-control" placeholder="Enter Password Confirmation"/>
-      </div>
-      <button type="submit" class="btn btn-primary btn-lg">Register</button>
-    </form>
+    </div>
   </div>
 </div>
+<!-- /.container -->
 
 <div class="container">
-  <div class="row">
-    <h1>Login</h1>
-    <form ng-submit="login()" role="form" ng-init="loginForm = {}">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="email" ng-model="loginForm.email" required="required" class="form-control" placeholder="Enter Email"/>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="password" ng-model="loginForm.password" required="required" class="form-control" placeholder="Enter Password"/>
-      </div>
-      <button type="submit" class="btn btn-primary btn-lg">Login</button>
-    </form>
-  </div>
-</div>
 
-<button class="btn btn-danger" ng-click="logout()">Logout</button>
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Book guy 2015</p>
+            </div>
+        </div>
+    </footer>
+
+</div>

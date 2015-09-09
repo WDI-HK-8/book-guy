@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :books
+
+  get 'mybooks',  to: 'books#index_my_books'
 end

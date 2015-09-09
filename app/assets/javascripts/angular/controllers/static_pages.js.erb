@@ -1,95 +1,18 @@
 app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', function($scope, $http, $auth, $location){
 
-  $scope.book = {};
-  $scope.form = {};
+  var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
-  $scope.form.create = function(){
-    var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
+  $http.get(url + '/books').success(function(response){
+    console.log(response);
+    $scope.items = response;
+  });
 
-    var data = {
-      book: $scope.book
-    };
-
-    $http.post(url + '/books', data).success(function(response){
-      console.log(response);
-    });
-  };
-
-  $scope.apiSearch = function(keyEvent, value) {
-    if (keyEvent.which === 13) {
-      var url = 'https://www.googleapis.com/books/v1/volumes?q=' + value.replace(' ', '+')
-      $http.get(url).success(function(response){
-        $scope.books = response.items
-        console.log($scope.books)
-
-
-        $scope.books.forEach(function(book){
-          book.publisher        = book.volumeInfo.publisher
-          book.published_date   = book.volumeInfo.publishedDate
-          book.page_count       = book.volumeInfo.pageCount
-          book.description      = book.volumeInfo.description
-          book.title            = book.volumeInfo.title
-          book.category         = book.volumeInfo.category
-          book.small_thumbnail  = book.volumeInfo.imageLinks.smallThumbnail
-          book.thumbnail        = book.volumeInfo.imageLinks.thumbnail
-          if (typeof book.volumeInfo.authors != 'undefined') {
-            book.author           = book.volumeInfo.authors.join([separator = ', '])
-          }
-          if (typeof book.volumeInfo.industryIdentifiers != 'undefined') {
-            book.volumeInfo.industryIdentifiers.forEach(function(isbn){
-              if (isbn.type === "ISBN_10") {
-                book.isbn10 = isbn.identifier
-              }else if (isbn.type === "ISBN_13") {
-                book.isbn13 = isbn.identifier
-              }
-            })
-          }
-          if (typeof book.volumeInfo.categories != 'undefined') {
-            book.category = book.volumeInfo.categories[0]
-          }
-        });
-      });
-    }
+  $scope.showDescription = function(){
+    $scope.description = true
   }
 
-  $scope.signup = function () {
-    $auth.submitRegistration($scope.registrationForm).
-     then(function(resp) {
-       // handle success response
-       console.log(resp);
-
-       // redirect back to root when registration succesfull
-       $location.path('/');
-     }).
-     catch(function(resp) {
-       // handle error response
-       console.log(resp);
-     });
-  };
-
-  $scope.login = function () {
-    $auth.submitLogin($scope.loginForm).
-     then(function(resp) {
-       // handle success response
-       console.log(resp);
-
-       // redirect back to root when registration succesfull
-       $location.path('/');
-     }).
-     catch(function(resp) {
-       // handle error response
-       console.log(resp);
-     });
-  };
-
-  $scope.logout = function () {
-     $auth.signOut().then(function(resp) {
-       console.log(resp);
-     }).catch(function(resp) {
-       console.log(resp);
-     });
-   };
-
-
+  $scope.hideDescription = function() {
+    $scope.description = false
+  }
 
 }]);

@@ -1,0 +1,71 @@
+.bookTableBody {
+  font-size: 15px;
+  vertical-align: top;
+}
+
+#itemDescription {
+  font-size: 15px;
+  margin: 10px 0px 0px 0px;
+  text-align: justify;
+  padding-right: 15px
+}
+
+#showDescriptionButton, #hideDescriptionButton, a, .thumbnail > img {
+  cursor: pointer;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+    position: relative;
+}
+
+.caption h4 {
+    // white-space: nowrap;
+}
+
+.thumbnail img {
+    height: 250px
+}
+
+.ratings {
+    position: absolute;
+    bottom: 6px
+}
+
+.ratings span {
+    color: #d17581;
+}
+
+#priceTag {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    font-size: 22px
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}

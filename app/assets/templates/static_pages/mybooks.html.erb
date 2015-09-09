@@ -1,0 +1,87 @@
+<navbar></navbar>
+
+<h1>LIST OF ALL MY BOOKS</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div ng-repeat="item in items track by $index">
+      <div class="page-header">
+        {{ item.title }}
+        {{ item.author }}
+        {{ item.publisher_name }}
+        {{ item.edition_info }}
+        {{ item.cover_image_url }}
+        {{ item.summary }}
+        {{ item.isbn10 }}
+        {{ item.isbn13 }}
+        <small>
+          {{ item.created_at }}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1>Add new book</h1>
+<form>
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" placeholder="Enter title" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
+  </div>
+  <div class="form-group">
+    <label>ISBN 10</label>
+    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter isbn10" ng-model="book.isbn10">
+  </div>
+  <div class="form-group">
+    <label>ISBN 13</label>
+    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter isbn13" ng-model="book.isbn13">
+  </div>
+  <div class="form-group">
+    <label>Pick your book</label>
+    <select ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
+  </div>
+  <div class="form-group">
+    <label>Author</label>
+    <input type="text" class="form-control" placeholder="Enter author" ng-model="book.author">
+  </div>
+  <div class="form-group">
+    <label>Publisher</label>
+    <input type="text" class="form-control" placeholder="Enter publisher" ng-model="book.publisher">
+  </div>
+  <div class="form-group">
+    <label>Category</label>
+    <input type="text" class="form-control" placeholder="Enter category" ng-model="book.category">
+  </div>
+  <div class="form-group">
+    <label>Published date</label>
+    <input type="text" class="form-control" placeholder="Enter published date" ng-model="book.published_date">
+  </div>
+  <div class="form-group">
+    <label>Small thumbnail</label>
+    <input type="text" class="form-control" placeholder="Enter small thumbnail" ng-model="book.small_thumbnail">
+  </div>
+  <div class="form-group">
+    <label>Thumbnail</label>
+    <input type="text" class="form-control" placeholder="Enter thumbnail" ng-model="book.thumbnail">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input type="text" class="form-control" placeholder="Enter description" ng-model="book.description">
+  </div>
+  <div class="form-group">
+    <label>Page count</label>
+    <input type="text" class="form-control" placeholder="Enter page count" ng-model="book.page_count">
+  </div>
+  <div class="form-group">
+    <label>Price</label>
+    <input type="text" class="form-control" placeholder="Enter price" ng-model="book.price">
+  </div>
+  <div class="form-group">
+    <label>Condition</label>
+    <input type="text" class="form-control" placeholder="Enter condition" ng-model="book.condition">
+  </div>
+  <div class="form-group">
+    <label>Notes</label>
+    <input type="text" class="form-control" placeholder="Enter notes" ng-model="book.notes">
+  </div>
+  <button type="button" ng-click="form.create()" class="btn btn-default">Submit</button>
+</form>
