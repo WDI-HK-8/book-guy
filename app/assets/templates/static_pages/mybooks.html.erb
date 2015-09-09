@@ -8,9 +8,9 @@
       <div class="row">
         <div ng-repeat="item in items track by $index" class="col-sm-3 col-lg-3 col-md-3">
           <div class="thumbnail">
-            <img ng-src="{{ item.thumbnail }}" data-toggle="modal" data-target="#modal{{item.id}}" alt="">
+            <img ng-src="{{ item.thumbnail }}" data-toggle="modal" data-target="#modal{{item.id}}" ng-click="stopEdit()" alt="">
             <div class="caption">
-              <h4><a data-toggle="modal" data-target="#modal{{item.id}}">{{item.title}}</a></h4>
+              <h4><a data-toggle="modal" data-target="#modal{{item.id}}" ng-click="stopEdit()">{{item.title}}</a></h4>
               <div class="ratings">
               <p>by <i>{{item.author}}</i></p>
                 <span>Condition: </span>
@@ -39,58 +39,103 @@
           <div class="modal" id="modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="{{item.id}}Label" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
+                <div ng-hide="editing" class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="text-danger fa fa-times"></i></button>
-                  <h4 class="modal-title" id="{{item.id}}Label"><i class="text-muted fa fa-shopping-cart"></i> <b> {{item.title}}</b></h4>
+                  <h4 class="modal-title" id="{{item.id}}Label">
+                    <i class="text-muted fa fa-shopping-cart"></i>
+                    <b> {{item.title}}</b>
+                  </h4>
                 </div>
                 <div class="modal-body">
-                  <form ng-submit='form.edit(item.id)'>
+                  <form id="editForm"  ng-submit='form.edit(edit.id)'>
                     <table class="pull-left col-md-8 ">
                       <tbody class="bookTableBody">
+                        <tr ng-show="editing">
+                          <td><strong>Title</strong></td>
+                          <td> </td>
+                          <td>
+                            <input type="text" class="form-control input-sm" placeholder="Enter title" ng-model="edit.title">
+                          </td>
+                        </tr>
                         <tr>
                           <td><strong>Author</strong></td>
                           <td> </td>
                           <td>
                             <span ng-hide="editing">{{ item.author }}</span>
-                            <input type="text" ng-show="editing" class="form-control" placeholder="Enter title" ng-model="edit.author">
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter author" ng-model="edit.author">
                           </td>
                         </tr>
                         <tr>
                           <td><strong>Category</strong></td>
                           <td> </td>
-                          <td>{{ item.category }}</td>
+                          <td>
+                            <span ng-hide="editing">{{ item.category }}</span>
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter category" ng-model="edit.category">
+                          </td>
                         </tr>
                         <tr>
                           <td><strong>Publisher</strong></td>
                           <td> </td>
-                          <td>{{ item.publisher }}</td>
+                          <td>
+                            <span ng-hide="editing">{{ item.publisher }}</span>
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter publisher" ng-model="edit.publisher">
+                          </td>
                         </tr>
                         <tr>
                           <td><strong>Published date</strong></td>
                           <td> </td>
-                          <td>{{ item.published_date }}</td>
+                          <td>
+                            <span ng-hide="editing">{{ item.published_date }}</span>
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter published_date" ng-model="edit.published_date">
+                          </td>
                         </tr>
                         <tr>
                           <td><strong>Page count</strong></td>
                           <td> </td>
-                          <td>{{ item.page_count }}</td>
+                          <td>
+                            <span ng-hide="editing">{{ item.page_count }}</span>
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter page_count" ng-model="edit.page_count">
+                          </td>
                         </tr>
                         <tr>
                           <td><strong>ISBN 10</strong></td>
                           <td> </td>
-                          <td>{{ item.isbn10 }}</td>
+                          <td>
+                            <span ng-hide="editing">{{ item.isbn10 }}</span>
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter isbn10" ng-model="edit.isbn10">
+                          </td>
                         </tr>
                         <tr>
                           <td><strong>ISBN 13</strong></td>
                           <td> </td>
-                          <td>{{ item.isbn13 }}</td>
+                          <td>
+                            <span ng-hide="editing">{{ item.isbn13 }}</span>
+                            <input type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter isbn13" ng-model="edit.isbn13">
+                          </td>
                         </tr>
-                        <tr>
-                          <td><strong>Notes from seller</strong></td>
+                        <tr ng-show="editing">
+                          <td><strong>Thumbnail</strong></td>
                           <td> </td>
-                          <td>{{ item.notes }}</td>
+                          <td>
+                            <input type="text" class="form-control input-sm" placeholder="Enter thumbnail url" ng-model="edit.thumbnail">
+                          </td>
                         </tr>
                         <tr>
+                          <td><strong>Notes</strong></td>
+                          <td> </td>
+                          <td>
+                            <span ng-hide="editing">{{ item.notes }}</span>
+                            <textarea rows="2" cols="30" type="text" ng-show="editing" class="form-control input-sm" placeholder="Enter notes" ng-model="edit.notes"></textarea>
+                          </td>
+                        </tr>
+                        <tr ng-show="editing">
+                          <td><strong>Description</strong></td>
+                          <td> </td>
+                          <td>
+                            <textarea rows="5" cols="30" type="text" class="form-control input-sm" placeholder="Enter notes" ng-model="edit.description"></textarea>
+                          </td>
+                        </tr>
+                        <tr ng-hide="editing">
                           <td id="showDescriptionButton" ng-hide="description" ng-click="description=true" class="btn-mais-info text-primary">
                             <i class="fa fa-plus-square-o"></i> Show description
                           </td>
@@ -104,21 +149,24 @@
 
 
                   <div class="col-md-4">
-                    <img ng-src="{{ item.thumbnail }}" alt="teste" class="img-thumbnail">
+                    <img ng-hide="editing" ng-src="{{ item.thumbnail }}" alt="teste" class="img-thumbnail">
+                    <h3 ng-show="editing">Preview:</h3>
+                    <img ng-show="editing" ng-src="{{ edit.thumbnail }}" alt="teste" class="img-thumbnail">
                   </div>
 
                   <div class="clearfix"></div>
-                  <p ng-show="description" id="itemDescription">{{item.description}}</p>
+                  <p ng-show="description && !editing" id="itemDescription">{{item.description}}</p>
                 </div>
 
                 <div class="modal-footer">
                   <div class="pull-right">
-                    <span class="text-muted modalPrice"><strong>${{item.price}}</strong></span>
+                    <span ng-hide="editing" class="text-muted modalPrice"><strong>${{item.price}}</strong></span>
+                    <input type="text" ng-show="editing" class="form-control input-lg" placeholder="Enter Price" ng-model="edit.price">
                   </div>
                   <div class="editButtons pull-left">
                     <span><button class="btn btn-primary" type="button" ng-hide="editing" ng-click='editBook(item.id)'>Edit</button></span>
                     <span><button class="btn btn-primary" type="button" ng-show="editing" ng-click="stopEdit()">Cancel</button></span>
-                    <span><button class="btn btn-primary" type="submit" ng-show="editing" ng-click='saveEdit(item.id)'>Save</button></span>
+                    <span><button class="btn btn-primary" type="submit" form="editForm" ng-show="editing">Save</button></span>
                     <span><button class="btn btn-primary btn-danger" ng-show="editing" ng-click='deleteBook(item.id)'>Delete this book</button></span>
                   </div>
                 </div>
@@ -165,10 +213,6 @@
   <div class="form-group">
     <label>Published date</label>
     <input type="text" class="form-control" placeholder="Enter published date" ng-model="book.published_date">
-  </div>
-  <div class="form-group">
-    <label>Small thumbnail</label>
-    <input type="text" class="form-control" placeholder="Enter small thumbnail" ng-model="book.small_thumbnail">
   </div>
   <div class="form-group">
     <label>Thumbnail</label>
