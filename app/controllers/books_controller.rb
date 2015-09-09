@@ -1,10 +1,16 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, :except => [:index]
+
   def index
     @books = Book.all
   end
 
+  def home
+    @books = current_user.books.all
+  end
+
   def create
-    @book = Book.new(post_params)
+    @book = current_user.books.new(post_params)
 
     if @book.save
       # render success in Jbuilder
@@ -22,7 +28,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find_by_id(params[:id])
+    @book = current_user.books.find_by_id(params[:id])
 
     if @book.nil?
       render json: { message: "Cannot find book" }, status: :not_found
@@ -32,7 +38,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find_by_id(params[:id])
+    @book = current_user.books.find_by_id(params[:id])
 
     if @book.nil?
       render json: { message: "Cannot find book" }, status: :not_found
