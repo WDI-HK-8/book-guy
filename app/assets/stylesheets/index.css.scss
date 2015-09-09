@@ -1,3 +1,18 @@
+.bookTableBody {
+  font-size: 15px;
+  vertical-align: top;
+}
+
+#itemDescription {
+  font-size: 15px;
+  margin: 10px 0px 0px 0px;
+  text-align: justify;
+  padding-right: 15px
+}
+
+#showDescriptionButton, #hideDescriptionButton, a, .thumbnail > img {
+  cursor: pointer;
+}
 
 .slide-image {
     width: 100%;
@@ -27,9 +42,12 @@
 }
 
 .ratings {
-    color: #d17581;
     position: absolute;
     bottom: 6px
+}
+
+.ratings span {
+    color: #d17581;
 }
 
 #priceTag {

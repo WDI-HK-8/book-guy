@@ -44,14 +44,13 @@
       </div>
 
       <div class="row">
-
         <div ng-repeat="item in items track by $index" class="col-sm-4 col-lg-4 col-md-4">
           <div class="thumbnail">
-            <img ng-src="{{ item.thumbnail }}" alt="">
+            <img ng-src="{{ item.thumbnail }}" data-toggle="modal" data-target="#modal{{item.id}}" alt="">
             <div class="caption">
-              <h4><a href="#">{{item.title}}</a></h4>
-              <p>by <i>{{item.author}}</i></p>
+              <h4><a data-toggle="modal" data-target="#modal{{item.id}}">{{item.title}}</a></h4>
               <div class="ratings">
+              <p>by <i>{{item.author}}</i></p>
                 <span>Condition: </span>
                 <span ng-repeat="Star in [1,2,3,4,5]">
                   <span ng-switch="item.condition >= Star">
@@ -72,6 +71,85 @@
                 </span>
               </div>
               <h4 id="priceTag" class="pull-right">${{item.price}}</h4>
+            </div>
+          </div>
+
+          <div class="modal" id="modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="{{item.id}}Label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="text-danger fa fa-times"></i></button>
+                  <h4 class="modal-title" id="{{item.id}}Label"><i class="text-muted fa fa-shopping-cart"></i> <b> {{item.title}}</b></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="pull-left col-md-8 ">
+                    <tbody class="bookTableBody">
+                      <tr>
+                        <td><strong>Author</strong></td>
+                        <td> </td>
+                        <td>{{ item.author }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Category</strong></td>
+                        <td> </td>
+                        <td>{{ item.category }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Publisher</strong></td>
+                        <td> </td>
+                        <td>{{ item.publisher }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Published date</strong></td>
+                        <td> </td>
+                        <td>{{ item.published_date }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Page count</strong></td>
+                        <td> </td>
+                        <td>{{ item.page_count }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>ISBN 10</strong></td>
+                        <td> </td>
+                        <td>{{ item.isbn10 }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>ISBN 13</strong></td>
+                        <td> </td>
+                        <td>{{ item.isbn13 }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Notes from seller</strong></td>
+                        <td> </td>
+                        <td>{{ item.notes }}</td>
+                      </tr>
+                      <tr>
+                        <td id="showDescriptionButton" ng-hide="description" ng-click="showDescription()" class="btn-mais-info text-primary">
+                          <i class="fa fa-plus-square-o"></i> Show description
+                        </td>
+                        <td id="hideDescriptionButton" ng-show="description" ng-click="hideDescription()" class="btn-mais-info text-primary">
+                          <i class="fa fa-minus-square-o"></i> Hide description
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                  <div class="col-md-4">
+                    <img ng-src="{{ item.thumbnail }}" alt="teste" class="img-thumbnail">
+                  </div>
+
+                  <div class="clearfix"></div>
+                  <p ng-show="description" id="itemDescription">{{item.description}}</p>
+                </div>
+
+                <div class="modal-footer">
+                  <div class="text-right pull-right col-md-3">
+                    <span class="h3 text-muted"><strong>${{item.price}}</strong></span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
