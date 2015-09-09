@@ -7,13 +7,6 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', func
     $scope.items = response;
   });
 
-  $scope.showDescription = function(){
-    $scope.description = true
-  }
-
-  $scope.hideDescription = function() {
-    $scope.description = false
-  }
 
   $scope.makeRequest = function(bookID) {
     var data = {

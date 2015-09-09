@@ -125,10 +125,10 @@
                         <td>{{ item.notes }}</td>
                       </tr>
                       <tr>
-                        <td id="showDescriptionButton" ng-hide="description" ng-click="showDescription()" class="btn-mais-info text-primary">
+                        <td id="showDescriptionButton" ng-hide="description" ng-click="description=true" class="btn-mais-info text-primary">
                           <i class="fa fa-plus-square-o"></i> Show description
                         </td>
-                        <td id="hideDescriptionButton" ng-show="description" ng-click="hideDescription()" class="btn-mais-info text-primary">
+                        <td id="hideDescriptionButton" ng-show="description" ng-click="description=false" class="btn-mais-info text-primary">
                           <i class="fa fa-minus-square-o"></i> Hide description
                         </td>
                       </tr>
@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="modal-footer">
-                  <div class="text-right pull-right">
+                  <div class="pull-right">
                     <span class="text-muted modalPrice"><strong>${{item.price}}</strong></span>
                     <span><button class="btn btn-primary btn-success" ng-click='makeRequest(item.id)'>Make a request to the seller</button></span>
                   </div>

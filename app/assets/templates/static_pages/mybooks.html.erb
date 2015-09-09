@@ -1,25 +1,136 @@
 <navbar></navbar>
 
-<h1>LIST OF ALL MY BOOKS</h1>
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div ng-repeat="item in items track by $index">
-      <div class="page-header">
-        {{ item.title }}
-        {{ item.author }}
-        {{ item.publisher_name }}
-        {{ item.edition_info }}
-        {{ item.cover_image_url }}
-        {{ item.summary }}
-        {{ item.isbn10 }}
-        {{ item.isbn13 }}
-        <small>
-          {{ item.created_at }}
-        </small>
+
+    <div class="col-md-12">
+      <h1>LIST OF ALL YOUR BOOKS</h1>
+      <div class="row">
+        <div ng-repeat="item in items track by $index" class="col-sm-3 col-lg-3 col-md-3">
+          <div class="thumbnail">
+            <img ng-src="{{ item.thumbnail }}" data-toggle="modal" data-target="#modal{{item.id}}" alt="">
+            <div class="caption">
+              <h4><a data-toggle="modal" data-target="#modal{{item.id}}">{{item.title}}</a></h4>
+              <div class="ratings">
+              <p>by <i>{{item.author}}</i></p>
+                <span>Condition: </span>
+                <span ng-repeat="Star in [1,2,3,4,5]">
+                  <span ng-switch="item.condition >= Star">
+                    <span ng-switch-when="true">
+                      <i class="fa fa-star"></i>
+                    </span>
+                    <span ng-switch-when="false">
+                      <span ng-switch="item.condition > (Star-1)">
+                        <span ng-switch-when="true">
+                          <i class="fa fa-star-half"></i>
+                        </span>
+                        <span ng-switch-when="false">
+                          <i class="fa fa-star-o"></i>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <h4 id="priceTag" class="pull-right">${{item.price}}</h4>
+            </div>
+          </div>
+
+          <div class="modal" id="modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="{{item.id}}Label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="text-danger fa fa-times"></i></button>
+                  <h4 class="modal-title" id="{{item.id}}Label"><i class="text-muted fa fa-shopping-cart"></i> <b> {{item.title}}</b></h4>
+                </div>
+                <div class="modal-body">
+                  <form ng-submit='form.edit(item.id)'>
+                    <table class="pull-left col-md-8 ">
+                      <tbody class="bookTableBody">
+                        <tr>
+                          <td><strong>Author</strong></td>
+                          <td> </td>
+                          <td>
+                            <span ng-hide="editing">{{ item.author }}</span>
+                            <input type="text" ng-show="editing" class="form-control" placeholder="Enter title" ng-model="edit.author">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Category</strong></td>
+                          <td> </td>
+                          <td>{{ item.category }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Publisher</strong></td>
+                          <td> </td>
+                          <td>{{ item.publisher }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Published date</strong></td>
+                          <td> </td>
+                          <td>{{ item.published_date }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Page count</strong></td>
+                          <td> </td>
+                          <td>{{ item.page_count }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>ISBN 10</strong></td>
+                          <td> </td>
+                          <td>{{ item.isbn10 }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>ISBN 13</strong></td>
+                          <td> </td>
+                          <td>{{ item.isbn13 }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Notes from seller</strong></td>
+                          <td> </td>
+                          <td>{{ item.notes }}</td>
+                        </tr>
+                        <tr>
+                          <td id="showDescriptionButton" ng-hide="description" ng-click="description=true" class="btn-mais-info text-primary">
+                            <i class="fa fa-plus-square-o"></i> Show description
+                          </td>
+                          <td id="hideDescriptionButton" ng-show="description" ng-click="description=false" class="btn-mais-info text-primary">
+                            <i class="fa fa-minus-square-o"></i> Hide description
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+
+
+                  <div class="col-md-4">
+                    <img ng-src="{{ item.thumbnail }}" alt="teste" class="img-thumbnail">
+                  </div>
+
+                  <div class="clearfix"></div>
+                  <p ng-show="description" id="itemDescription">{{item.description}}</p>
+                </div>
+
+                <div class="modal-footer">
+                  <div class="pull-right">
+                    <span class="text-muted modalPrice"><strong>${{item.price}}</strong></span>
+                  </div>
+                  <div class="editButtons pull-left">
+                    <span><button class="btn btn-primary" type="button" ng-hide="editing" ng-click='editBook(item.id)'>Edit</button></span>
+                    <span><button class="btn btn-primary" type="button" ng-show="editing" ng-click="stopEdit()">Cancel</button></span>
+                    <span><button class="btn btn-primary" type="submit" ng-show="editing" ng-click='saveEdit(item.id)'>Save</button></span>
+                    <span><button class="btn btn-primary btn-danger" ng-show="editing" ng-click='deleteBook(item.id)'>Delete this book</button></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <h1>Add new book</h1>
 <form>

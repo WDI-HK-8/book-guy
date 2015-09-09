@@ -58,4 +58,24 @@ app.controller('MyBooksCtrl', ['$scope', '$http', '$location', '$auth', function
       });
     }
   }
+
+  $scope.editBook = function(id) {
+    $scope.edit = getById($scope.items, id)
+    $scope.editing = true
+  }
+
+  $scope.stopEdit = function() {
+    $scope.editing = false
+  }
+
+  function getById(arr, id) {
+    var result = [];
+    arr.forEach(function(o){if (o.id == id) result.push(o);} );
+    return result? result[0] : null; // or undefined
+  }
+
+  $scope.form.edit = function(id) {
+
+  }
+
 }]);
