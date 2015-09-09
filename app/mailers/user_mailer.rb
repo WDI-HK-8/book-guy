@@ -1,4 +1,4 @@
-class RequestMailer < ApplicationMailer
+class UserMailer < ApplicationMailer
   default from: ENV['REQUEST_DEFAULT_FROM']
 
    def request_email(user, book)

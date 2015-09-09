@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
     @request = current_user.requests.new(post_params)
 
     if @request.save
-      # render success in Jbuilder
+      UserMailer.request_email(@request.book.user, @request.book).deliver_now
     else
       render json: { message: "400 Bad Request" }, status: :bad_request
     end
