@@ -18,4 +18,5 @@
 //= require jquery/dist/jquery.min.js
 // = require bootstrap/dist/js/bootstrap.min.js
 // = require angular-bootstrap/ui-bootstrap-tpls.min.js
+// = require angular-smart-table/dist/smart-table.min.js
 //= require_tree .
