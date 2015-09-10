@@ -5,11 +5,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <p class="lead">Pick a category</p>
+      <div class="input-group" id="searchInput">
+        <input type="text" class="form-control">
+        <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+        </span>
+      </div><!-- /input-group -->
+      <p class="lead" id="sortBy">Sort by</p>
       <div class="list-group">
-        <a href="#" class="list-group-item">Category 1</a>
-        <a href="#" class="list-group-item">Category 2</a>
-        <a href="#" class="list-group-item">Category 3</a>
+        <a href="#" class="list-group-item">Price</a>
+        <a href="#" class="list-group-item">Condition</a>
       </div>
     </div>
 
