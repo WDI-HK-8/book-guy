@@ -2,4 +2,8 @@ app.controller('MyRequestsCtrl', ['$scope', '$http', '$location', '$auth', funct
 
   var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
+  $http.get(url + '/requests').success(function(response){
+    console.log(response);
+  });
+
 }]);
