@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <a class="btn btn-info pull-right btn-md" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> Add new</a>
+    <a class="btn btn-info pull-right btn-md" id="addNewButton" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> Add new</a>
     <div class="col-md-12">
       <div class="row">
         <div ng-repeat="item in items track by $index" class="col-sm-3 col-lg-3 col-md-3">
@@ -158,9 +158,9 @@
 
 
                   <div class="col-md-4">
-                    <img ng-hide="editing" ng-src="{{ item.thumbnail }}" alt="teste" class="img-thumbnail">
+                    <img ng-hide="editing" ng-src="{{ item.thumbnail }}" err-src="<%= image_path('book-guy-image.png') %>" alt="Image not found" class="img-thumbnail">
                     <h3 ng-show="editing">Preview:</h3>
-                    <img ng-show="editing" ng-src="{{ edit.thumbnail }}" alt="teste" class="img-thumbnail">
+                    <img ng-show="editing" ng-src="{{ edit.thumbnail }}" err-src="<%= image_path('book-guy-image.png') %>" alt="Image not found" class="img-thumbnail">
                   </div>
 
                   <div class="clearfix"></div>
@@ -300,11 +300,14 @@
                 <input type="text" class="form-control input-sm"  placeholder="Enter price" ng-model="book.price">
               </td>
             </tr>
-
           </table>
         </form>
+        <div class="col-md-4">
+          <h3 >Preview:</h3>
+          <img ng-src="{{ book.thumbnail }}" err-src="<%= image_path('book-guy-image.png') %>" alt="Image not found"  class="img-thumbnail">
+        </div>
+        <div class="clearfix"></div>
       </div>
-      <div class="clearfix"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" ng-click="form.create()" class="btn btn-primary">Submit</button>
