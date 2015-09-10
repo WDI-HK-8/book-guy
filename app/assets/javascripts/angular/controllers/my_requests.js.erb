@@ -2,10 +2,15 @@ app.controller('MyRequestsCtrl', ['$scope', '$http', '$location', '$auth', '$fil
 
   var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
+  $scope.outgoing = []
+
   $http.get(url + '/requests').success(function(response){
-    $scope.outgoings = response.outgoings
-    $scope.incomings = response.incomings
-    console.log($scope.outgoings)
+    $scope.dataOutgoings = response.outgoings
+    $scope.dataIncomings = response.incomings
+    $scope.outgoings = [].concat($scope.dataOutgoings);
+    $scope.incomings = [].concat($scope.dataIncomings);
+
+    // console.log($scope.outgoings)
     console.log($scope.incomings)
   });
 

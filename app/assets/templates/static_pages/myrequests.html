@@ -13,18 +13,18 @@
 
     <div class="col-md-9">
       <div ng-show="tab === 1">
-        <table st-table="incomings" class="table table-striped">
+        <table st-table="incomings" st-safe-src="dataIncomings" class="table table-striped">
         	<thead>
         	<tr>
-        		<th st-sort="book.title">Title</th>
-        		<th st-sort="created_at">Received</th>
-        		<th st-sort="request_from">Sender</th>
-        		<th st-sort="request_email">Contact</th>
+        		<th st-sort="bookTitle">Title</th>
+        		<th st-sort="createdAt">Received</th>
+        		<th st-sort="requestFrom">Sender</th>
+        		<th st-sort="requestEmail">Contact</th>
         		<th>Email</th>
         	</tr>
         	<tr>
         		<th>
-        			<input st-search="book.title" placeholder="Search for title" class="input-sm form-control" type="search"/>
+        			<input st-search="bookTitle" placeholder="Search for title" class="input-sm form-control" type="search"/>
         		</th>
         		<th colspan="4">
         			<input st-search placeholder="Global search" class="input-sm form-control" type="search"/>
@@ -33,18 +33,46 @@
         	</thead>
         	<tbody>
         	<tr ng-repeat="incoming in incomings">
-        		<td>{{incoming.book.title}}</td>
-        		<td>{{incoming.created_at | date:'short' }}</td>
-        		<td>{{incoming.request_from}}</td>
-        		<td>{{incoming.request_email}}</td>
-        		<td><a ng-href="mailto:{{incoming.request_email}}">Email</a></td>
+        		<td>{{incoming.bookTitle}}</td>
+        		<td>{{incoming.createdAt | date:'short' }}</td>
+        		<td>{{incoming.requestFrom}}</td>
+        		<td>{{incoming.requestEmail}}</td>
+        		<td><a ng-href="mailto:{{incoming.requestEmail}}">Email</a></td>
         	</tr>
         	</tbody>
         </table>
 
 
       </div>
-      <p ng-show="tab === 2"> I drink pulpy orange juice, mango milk shake... </p>
+      <div ng-show="tab === 2">
+        <table st-table="outgoings" st-safe-src="dataOutgoings" class="table table-striped">
+          <thead>
+          <tr>
+            <th st-sort="bookTitle">Title</th>
+            <th st-sort="bookAuthor">Author</th>
+            <th st-sort="bookPublisher">Publisher</th>
+            <th st-sort="createdAt">Sent</th>
+          </tr>
+          <tr>
+            <th>
+              <input st-search="bookTitle" placeholder="Search for title" class="input-sm form-control" type="search"/>
+            </th>
+            <th colspan="4">
+              <input st-search placeholder="Global search" class="input-sm form-control" type="search"/>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="outgoing in outgoings">
+            <td>{{outgoing.bookTitle}}</td>
+            <td>{{outgoing.bookAuthor}}</td>
+            <td>{{outgoing.bookPublisher}}</td>
+            <td>{{outgoing.createdAt  | date:'short' }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
     </div>
   </div>
 </div>
