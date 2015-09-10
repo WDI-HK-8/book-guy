@@ -15,4 +15,13 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', func
     $scope.description = false
   }
 
+  $scope.makeRequest = function(bookID) {
+    var data = {
+      book_id: bookID
+    };
+    $http.post(url + '/requests', data).success(function(response){
+      console.log(response);
+    });
+  }
+
 }]);
