@@ -1,12 +1,14 @@
 json.outgoings @outgoings do |outgoing|
-  json.request_id outgoing.id
-  json.created_at outgoing.created_at
-  json.book outgoing.book
+  json.requestId outgoing.id
+  json.createdAt outgoing.created_at
+  json.bookTitle outgoing.book.title
+  json.bookPublisher outgoing.book.publisher
+  json.bookAuthor outgoing.book.author
 end
 json.incomings @incomings do |incoming|
-  json.request_from incoming.user.name
-  json.request_email incoming.user.email
-  json.request_id incoming.id
-  json.created_at incoming.created_at
-  json.book incoming.book
+  json.requestFrom incoming.user.name
+  json.requestEmail incoming.user.email
+  json.requestId incoming.id
+  json.createdAt incoming.created_at
+  json.bookTitle incoming.book.title
 end
