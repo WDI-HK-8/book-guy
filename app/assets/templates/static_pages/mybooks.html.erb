@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 <navbar></navbar>
 
 <div class="container">
   <div class="row">
-
+    <a class="btn btn-info pull-right btn-md" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> Add new</a>
     <div class="col-md-12">
-      <h1>LIST OF ALL YOUR BOOKS</h1>
       <div class="row">
         <div ng-repeat="item in items track by $index" class="col-sm-3 col-lg-3 col-md-3">
           <div class="thumbnail">
@@ -121,6 +122,14 @@
                           </td>
                         </tr>
                         <tr>
+                        <tr ng-show="editing">
+                          <td><strong>Condition</strong></td>
+                          <td> </td>
+                          <td class="conditionRating">
+                            <rating ng-model="edit.condition" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ></rating>
+                          </td>
+                        </tr>
+                        <tr>
                           <td><strong>Notes</strong></td>
                           <td> </td>
                           <td>
@@ -180,63 +189,126 @@
 </div>
 
 
-<h1>Add new book</h1>
-<form>
-  <div class="form-group">
-    <label>Title</label>
-    <input type="text" class="form-control" placeholder="Enter title" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
+
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add new book</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <table class="pull-left col-md-8">
+            <tr>
+              <td><strong>Title</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm" placeholder="Enter title" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>ISBN 10</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter isbn10" ng-model="book.isbn10">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>ISBN 13</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter isbn13" ng-model="book.isbn13">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Pick your book</strong></td>
+              <td> </td>
+              <td>
+                <select ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Author</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter author" ng-model="book.author">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Publisher</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter publisher" ng-model="book.publisher">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Category</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter category" ng-model="book.category">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Published date</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter published date" ng-model="book.published_date">
+              </td>
+            </tr>
+            </tr>
+            <tr>
+              <td><strong>Page count</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter page count" ng-model="book.page_count">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Thumbnail</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter thumbnail" ng-model="book.thumbnail">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Description</strong></td>
+              <td> </td>
+              <td>
+                <textarea rows="5" cols="30" type="text" class="form-control input-sm" placeholder="Enter description" ng-model="book.description"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Notes</strong></td>
+              <td> </td>
+              <td>
+                <textarea rows="2" cols="30" type="text" class="form-control input-sm" placeholder="Enter notes" ng-model="book.notes"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Condition</strong></td>
+              <td> </td>
+              <td class="conditionRating">
+                <rating ng-model="book.condition" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ></rating>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Price</strong></td>
+              <td> </td>
+              <td>
+                <input type="text" class="form-control input-sm"  placeholder="Enter price" ng-model="book.price">
+              </td>
+            </tr>
+
+          </table>
+        </form>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" ng-click="form.create()" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label>ISBN 10</label>
-    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter isbn10" ng-model="book.isbn10">
-  </div>
-  <div class="form-group">
-    <label>ISBN 13</label>
-    <input type="text" class="form-control" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter isbn13" ng-model="book.isbn13">
-  </div>
-  <div class="form-group">
-    <label>Pick your book</label>
-    <select ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
-  </div>
-  <div class="form-group">
-    <label>Author</label>
-    <input type="text" class="form-control" placeholder="Enter author" ng-model="book.author">
-  </div>
-  <div class="form-group">
-    <label>Publisher</label>
-    <input type="text" class="form-control" placeholder="Enter publisher" ng-model="book.publisher">
-  </div>
-  <div class="form-group">
-    <label>Category</label>
-    <input type="text" class="form-control" placeholder="Enter category" ng-model="book.category">
-  </div>
-  <div class="form-group">
-    <label>Published date</label>
-    <input type="text" class="form-control" placeholder="Enter published date" ng-model="book.published_date">
-  </div>
-  <div class="form-group">
-    <label>Thumbnail</label>
-    <input type="text" class="form-control" placeholder="Enter thumbnail" ng-model="book.thumbnail">
-  </div>
-  <div class="form-group">
-    <label>Description</label>
-    <input type="text" class="form-control" placeholder="Enter description" ng-model="book.description">
-  </div>
-  <div class="form-group">
-    <label>Page count</label>
-    <input type="text" class="form-control" placeholder="Enter page count" ng-model="book.page_count">
-  </div>
-  <div class="form-group">
-    <label>Price</label>
-    <input type="text" class="form-control" placeholder="Enter price" ng-model="book.price">
-  </div>
-  <div class="form-group">
-    <label>Condition</label>
-    <input type="text" class="form-control" placeholder="Enter condition" ng-model="book.condition">
-  </div>
-  <div class="form-group">
-    <label>Notes</label>
-    <input type="text" class="form-control" placeholder="Enter notes" ng-model="book.notes">
-  </div>
-  <button type="button" ng-click="form.create()" class="btn btn-default">Submit</button>
-</form>
+</div>
