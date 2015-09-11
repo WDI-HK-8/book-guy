@@ -3,7 +3,6 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', func
   var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
   $http.get(url + '/books').success(function(response){
-    console.log(response);
     $scope.items = response;
   });
 
@@ -13,7 +12,6 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', func
       book_id: bookID
     };
     $http.post(url + '/requests', data).success(function(response){
-      console.log(response);
     });
   }
 
