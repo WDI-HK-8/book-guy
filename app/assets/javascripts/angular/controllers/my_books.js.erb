@@ -11,12 +11,10 @@ app.controller('MyBooksCtrl', ['$scope', '$http', '$location', '$auth', function
   $scope.form = {};
 
   $scope.form.create = function(){
-    var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
-
     var data = {
       book: $scope.book
     };
-
+    data.book.condition /= 2;
     $http.post(url + '/books', data).success(function(response){
       console.log(response);
     });
@@ -58,4 +56,45 @@ app.controller('MyBooksCtrl', ['$scope', '$http', '$location', '$auth', function
       });
     }
   }
+
+  $scope.editBook = function(id) {
+    $scope.edit = angular.copy(getById($scope.items, id)) // Use copy to disable two way binding
+    $scope.editing = true
+    $scope.edit.condition *= 2
+  }
+
+  $scope.stopEdit = function() {
+    $scope.editing = false
+  }
+
+  function getById(arr, id) {
+    var result = [];
+    arr.forEach(function(o){if (o.id == id) result.push(o);} );
+    return result? result[0] : null; // or undefined
+  }
+
+  $scope.form.edit = function(id){
+    var data = {
+      book: angular.copy($scope.edit)
+    };
+    data.book.condition /= 2;
+    $http.put(url + '/books/' + id , data).success(function(response){
+      console.log(response);
+    });
+  };
+
+  $scope.deleteBook = function(id){
+    $http.delete(url + '/books/' + id).success(function(response){
+      console.log(response);
+    });
+  };
+
+  $scope.rate = 7;
+  $scope.max = 10;
+  $scope.isReadonly = false;
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+  };
+
 }]);
