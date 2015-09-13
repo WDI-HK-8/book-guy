@@ -1,1 +1,64 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 <navbar></navbar>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p class="lead">Settings</p>
+      <div class="list-group" ng-init="tab = 1">
+        <a ng-click="tab = 1" class="list-group-item">Account settings</a>
+        <a ng-click="tab = 2" class="list-group-item">About</a>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div ng-show="tab === 1">
+        <p class="settingsHead">Account settings</p>
+        <p class="settingsSubHead">Change your password</p>
+        <form ng-submit='changePassword()' class="settingsContent" role="form" ng-init="changePasswordForm = {}">
+          <table class="pull-left col-md-4 ">
+            <tbody>
+              <tr>
+                <td>Old password</td>
+                <td> </td>
+                <td>
+                  <input type="password" class="form-control input-sm settingsInput" required="required" placeholder="Old password" ng-model="changePasswordForm.current_password">
+                </td>
+              </tr>
+              <tr>
+                <td>New password</td>
+                <td> </td>
+                <td>
+                  <input type="password" class="form-control input-sm settingsInput" required="required" placeholder="New password" ng-model="changePasswordForm.password">
+                </td>
+              </tr>
+              <tr>
+                <td>Confirm password</td>
+                <td> </td>
+                <td>
+                  <input type="password" class="form-control input-sm settingsInput" required="required" placeholder="Confirm new password" ng-model="changePasswordForm.password_confirmation">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-secondary btn-sm settingsButton" ng-show="passwordSaveButtonText !== 'Saved'" type="submit">
+            <span ng-show="passwordSaveButtonText == 'Loading'">
+              <i class="fa fa-refresh fa-spin"></i>
+            </span>
+            Save
+          </button>
+          <button class="btn btn-secondary btn-sm settingsButton fakeButton" ng-show="passwordSaveButtonText == 'Saved'">
+            <span ng-show="passwordSaveButtonText == 'Saved'">
+              <i class="fa fa-check"></i>
+            </span>
+            Saved
+          </button>
+        </form>
+      </div>
+      <div ng-show="tab === 2">
+        About
+      </div>
+    </div>
+  </div>
+</div>

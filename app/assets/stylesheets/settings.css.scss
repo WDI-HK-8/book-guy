@@ -1,0 +1,31 @@
+.settingsHead {
+  font-size: 21px;
+  border-bottom: 1px solid #E8E8EE;
+  padding-bottom: 20px;
+  margin-top: -1px
+}
+
+.settingsSubHead {
+  margin-top: 15px;
+  font-size: 18px
+}
+
+.settingsContent {
+  margin: 5px 0px 0px 30px
+}
+
+.settingsButton {
+  clear: both;
+  float: left;
+  margin-top: 10px
+}
+
+.settingsInput {
+  margin: 3px 0px 3px 0px
+}
+
+.fakeButton:hover {
+    /* here copy default .btn class styles */
+    cursor:default !important;
+        /* or something like that */
+}
