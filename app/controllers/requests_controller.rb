@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
     @request = current_user.requests.new(post_params)
 
     if @request.save
-      UserMailer.request_email(@request.book.user, @request.book).deliver_now
+      UserMailer.request_email(@request.book.user, @request.book).deliver_now if @request.book.user.notification
     else
       render json: { message: "400 Bad Request" }, status: :bad_request
     end
