@@ -11,6 +11,11 @@ class RequestsController < ApplicationController
     end
   end
 
+  def index
+    @outgoings = current_user.requests.all
+    @incomings = Request.joins(:book).where('books.user_id' => current_user.id)
+  end
+
   private
 
   def post_params
