@@ -3,6 +3,8 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @books = @books.where("title ILIKE ? or author ILIKE ? or publisher ILIKE ? or description ILIKE ? or category ILIKE ? or notes ILIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%") if params[:q].present?
+
   end
 
   def index_my_books
