@@ -30,7 +30,6 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$fi
   $http.get(url + '/books').success(function(response){
     $scope.items = response;
     $scope.order('created_at', true)
-    console.log($scope.items)
   });
 
 
@@ -50,7 +49,6 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$fi
   };
 
   $scope.searchItem = function() {
-    console.log($scope.search);
     $http.get(url + '/books?q=' + $scope.search).success(function(response){
       $scope.items = response;
     });
