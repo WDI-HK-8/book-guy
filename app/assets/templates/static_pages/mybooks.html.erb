@@ -174,7 +174,20 @@
                   <div class="editButtons pull-left">
                     <span><button class="btn btn-primary" type="button" ng-hide="editing" ng-click='editBook(item.id)'>Edit</button></span>
                     <span><button class="btn btn-primary" type="button" ng-show="editing" ng-click="stopEdit()">Cancel</button></span>
-                    <span><button class="btn btn-primary" type="submit" form="editForm" ng-show="editing">Save</button></span>
+                    <span ng-show="editing">
+                      <button class="btn btn-primary" ng-show="editButtonText !== 'Saved'" type="submit" form="editForm">
+                        <span ng-show="editButtonText == 'Loading'">
+                          <i class="fa fa-refresh fa-spin"></i>
+                        </span>
+                        Save
+                      </button>
+                      <button type="button" class="btn btn-primary fakeButton" ng-show="editButtonText == 'Saved'">
+                        <span ng-show="editButtonText == 'Saved'">
+                          <i class="fa fa-check"></i>
+                        </span>
+                        Saved
+                      </button>
+                    </span>
                     <span><button class="btn btn-primary btn-danger" ng-show="editing" ng-click='deleteBook(item.id)'>Delete this book</button></span>
                   </div>
                 </div>
@@ -225,7 +238,7 @@
               <td><strong>Pick your book</strong></td>
               <td> </td>
               <td>
-                <select ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
+                <select id="selectBook" ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
               </td>
             </tr>
             <tr>
@@ -309,7 +322,18 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" ng-click="form.create()" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" ng-show="createButtonText !== 'Saved'" ng-click="form.create()" type="button">
+          <span ng-show="createButtonText == 'Loading'">
+            <i class="fa fa-refresh fa-spin"></i>
+          </span>
+          Save
+        </button>
+        <button type="button" class="btn btn-primary fakeButton" ng-show="createButtonText == 'Saved'">
+          <span ng-show="createButtonText == 'Saved'">
+            <i class="fa fa-check"></i>
+          </span>
+          Saved
+        </button>
       </div>
     </div>
   </div>
