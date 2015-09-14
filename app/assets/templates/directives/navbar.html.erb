@@ -82,7 +82,19 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" form="signUpForm" class="btn btn-primary">Sign up</button>
+        <button class="btn btn-primary" ng-show="signupButtonText !== 'Saved'" form="signUpForm" type="submit">
+          <span ng-show="signupButtonText == 'Loading'">
+            <i class="fa fa-refresh fa-spin"></i>
+          </span>
+          Signup
+        </button>
+        <button type="button" class="btn btn-primary fakeButton" ng-show="signupButtonText == 'Saved'">
+          <span ng-show="signupButtonText == 'Saved'">
+            <i class="fa fa-check"></i>
+          </span>
+          Please check your email
+        </button>
+
       </div>
     </div>
   </div>

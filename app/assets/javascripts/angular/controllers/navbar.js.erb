@@ -25,10 +25,10 @@ app.controller('NavbarCtrl', ['$scope', '$auth', '$location', '$route', function
    };
 
    $scope.signup = function () {
+      $scope.signupButtonText = 'Loading'
       $auth.submitRegistration($scope.registrationForm).
        then(function(resp) {
-
-         $location.path('/');
+        $scope.signupButtonText = 'Saved'
        }).
        catch(function(resp) {
          console.log(resp);
