@@ -1,5 +1,26 @@
 app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$filter', function($scope, $http, $auth, $location, $filter){
 
+  $scope.myInterval = 5000;
+  $scope.noWrapSlides = false;
+  var slides = $scope.slides = [
+    {
+      image: '<%= image_path('book1.jpg') %>',
+      text: ''
+    },
+    {
+      image: '<%= image_path('book2.jpg') %>',
+      text: ''
+    },
+    {
+      image: '<%= image_path('book3.jpg') %>',
+      text: ''
+    },
+    {
+      image: '<%= image_path('book4.jpg') %>',
+      text: ''
+    }
+  ];
+
   var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
   $http.get(url + '/books').success(function(response){
@@ -26,5 +47,6 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$fi
       $scope.items = response;
     });
   }
+
 
 }]);
