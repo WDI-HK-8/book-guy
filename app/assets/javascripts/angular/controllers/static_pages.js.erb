@@ -1,6 +1,9 @@
 app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$filter', function($scope, $http, $auth, $location, $filter){
 
-  $scope.myInterval = 5000;
+  $scope.authData = $auth.validateUser();
+  $scope.userStatus = $scope.authData.$$state.status
+
+  $scope.myInterval = 3000;
   $scope.noWrapSlides = false;
   var slides = $scope.slides = [
     {
@@ -23,16 +26,21 @@ app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$fi
 
   var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
 
+
   $http.get(url + '/books').success(function(response){
     $scope.items = response;
+    $scope.order('created_at', true)
+    console.log($scope.items)
   });
 
 
   $scope.makeRequest = function(bookID) {
+    $scope['makeRequestButtonText' + bookID] = 'Loading'
     var data = {
       book_id: bookID
     };
     $http.post(url + '/requests', data).success(function(response){
+      $scope['makeRequestButtonText' + bookID] = 'Saved'
     });
   }
 

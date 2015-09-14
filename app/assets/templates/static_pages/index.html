@@ -7,16 +7,16 @@
       <div class="input-group" id="searchInput">
         <form  ng-submit="searchItem()" method="post">
           <span class="input-group-btn">
-          <input type="text" class="form-control" ng-model="search">
+          <input type="text" class="form-control" ng-model="search" placeholder="title, author, description..">
           <button class="btn btn-default" id="indexSearchButton" type="submit"><i class="fa fa-search"></i></button>
           </span>
         </form>
       </div><!-- /input-group -->
       <p class="lead" id="sortBy">Sort by</p>
-      <div class="list-group">
-        <a class="list-group-item" ng-click="reverse=true;order('created_at', true)">Newest</a>
-        <a class="list-group-item" ng-click="reverse=!reverse;order('price', reverse)">Price</a>
-        <a class="list-group-item" ng-click="reverse=!reverse;order('condition', reverse)">Condition</a>
+      <div class="list-group" ng-init="activeSort = 1">
+        <a class="list-group-item" ng-class="{active: activeSort == 1}" ng-click="reverse=true;order('created_at', true); activeSort = 1">Newest</a>
+        <a class="list-group-item" ng-class="{active: activeSort == 2}" ng-click="reverse=!reverse;order('price', reverse); activeSort = 2">Price</a>
+        <a class="list-group-item" ng-class="{active: activeSort == 3}" ng-click="reverse=!reverse;order('condition', reverse); activeSort = 3">Condition</a>
       </div>
     </div>
 
@@ -135,8 +135,24 @@
 
                 <div class="modal-footer">
                   <div class="pull-right">
+                    <span id="signupMessage" ng-show="userStatus !== 1">
+                      Want this book? Sign up now!
+                    </span>
                     <span class="text-muted modalPrice"><strong>${{item.price}}</strong></span>
-                    <span><button class="btn btn-primary btn-success" ng-click='makeRequest(item.id)'>Make a request to the seller</button></span>
+                    <span ng-hide="item.your_book || userStatus !== 1">
+                      <button class="btn btn-primary btn-success" ng-show="makeRequestButtonText{{item.id}} !== 'Saved' && !item.request_sent" ng-click='makeRequest(item.id)'>
+                        <span ng-show="makeRequestButtonText{{item.id}} == 'Loading'">
+                          <i class="fa fa-refresh fa-spin"></i>
+                        </span>
+                        Make a request to the seller
+                      </button>
+                      <button type="button" class="btn btn-primary btn-success" ng-show="makeRequestButtonText{{item.id}} == 'Saved' || item.request_sent">
+                        <span ng-show="makeRequestButtonText{{item.id}} == 'Saved'">
+                          <i class="fa fa-check"></i>
+                        </span>
+                        Request has been sent to the seller
+                      </button>
+                    </span>
                   </div>
                 </div>
               </div>
