@@ -65,7 +65,10 @@ ActiveRecord::Schema.define(version: 20150909043132) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "name"
-    t.string   "nickname"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "notification",           default: true
+    t.boolean  "newsletter",             default: true
     t.string   "image"
     t.string   "email"
     t.json     "tokens"

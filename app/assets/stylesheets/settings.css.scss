@@ -1,0 +1,87 @@
+.settingsHead {
+  font-size: 21px;
+  border-bottom: 1px solid #E8E8EE;
+  padding-bottom: 20px;
+  margin-top: -1px
+}
+
+.settingsSubHead {
+  margin-top: 15px;
+  font-size: 18px
+}
+
+.settingsContent {
+  margin: 5px 0px 0px 30px
+}
+
+.settingsButton {
+  clear: left;
+  float: left;
+  margin-top: 5px;
+}
+
+.settingsData {
+  height: 36px
+}
+
+.settingsInput {
+  margin: 3px 0px 3px 0px
+}
+
+.settingsEdit {
+  margin-top: -33px
+}
+
+.fakeButton:hover {
+    /* here copy default .btn class styles */
+    cursor:default !important;
+        /* or something like that */
+}
+
+.settingsErrorMessage {
+  font-size: 15px;
+  position: absolute;
+  margin: 8px 0px 0px 10px;
+  padding: 0px 5px 1px 5px;
+  border: 1px solid #ff0033;
+  border-radius: 5px;
+  color: #ff0033
+}
+
+#aboutDescription {
+  display: block;
+  float: left;
+  margin-left: 20px
+}
+
+#aboutLogo {
+  height: 50px;
+  display: block;
+  float: left;
+}
+
+.aboutContent {
+  padding: 0px;
+  margin-top: 20px;
+  display: block;
+  float: left;
+}
+
+#appName {
+  font-size: 21px;
+  margin-bottom: 2px
+}
+
+.aboutVersion {
+  display: block;
+  clear: left;
+  float: left;
+  margin-top: 20px
+}
+
+.aboutFooter {
+  display: block;
+  clear: left;
+  float: left;
+  margin-top: 300px
+}

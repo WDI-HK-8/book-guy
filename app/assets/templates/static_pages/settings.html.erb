@@ -1,0 +1,200 @@
+
+<navbar></navbar>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p class="lead">Settings</p>
+      <div class="list-group" ng-init="tab = 1">
+        <a ng-click="tab = 1" class="list-group-item">Account settings</a>
+        <a ng-click="tab = 2" class="list-group-item">About</a>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div ng-show="tab === 1">
+        <p class="settingsHead">Account settings</p>
+        <div class="container">
+          <p class="settingsSubHead">Profile</p>
+          <form ng-submit='updateProfile()' class="settingsContent" role="form">
+            <table class="pull-left col-md-4 ">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td> </td>
+                  <td>
+                    <a class="pull-right settingsEdit" ng-click="profileEditing=true" ng-hide="profileEditing">edit</a>
+                    <a class="pull-right settingsEdit" ng-click="profileEditing=false" ng-show="profileEditing">cancel</a>
+                  </td>
+                </tr>
+                <tr class="settingsData">
+                  <td>First name: </td>
+                  <td> </td>
+                  <td>
+                    <span ng-hide="profileEditing">{{ userData.first_name }}</span>
+                    <input ng-show="profileEditing" type="text" class="form-control input-sm settingsInput" required="required" placeholder="First name" ng-model="updateProfileForm.first_name">
+                  </td>
+                </tr>
+                <tr class="settingsData">
+                  <td>Last name: </td>
+                  <td> </td>
+                  <td>
+                    <span ng-hide="profileEditing">{{ userData.last_name }}</span>
+                    <input ng-show="profileEditing" type="text" class="form-control input-sm settingsInput" required="required" placeholder="Last name" ng-model="updateProfileForm.last_name">
+                  </td>
+                </tr>
+                <tr class="settingsData">
+                  <td>Screen name: </td>
+                  <td> </td>
+                  <td>
+                    <span ng-hide="profileEditing">{{ userData.name }}</span>
+                    <input ng-show="profileEditing" type="text" class="form-control input-sm settingsInput" required="required" placeholder="Screen name" ng-model="updateProfileForm.name">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="settingsButton" ng-show="profileEditing">
+              <button class="btn btn-secondary btn-sm settingsButton" ng-show="profileSaveButtonText !== 'Saved'" type="submit">
+                <span ng-show="profileSaveButtonText == 'Loading'">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </span>
+                Save
+              </button>
+              <span ng-show="profileSaveButtonText == 'Error'" class="settingsErrorMessage">
+                <i class="fa fa-times"></i>
+                Unknown error
+              </span>
+              <button type="button" class="btn btn-secondary btn-sm settingsButton fakeButton" ng-show="profileSaveButtonText == 'Saved'">
+                <span ng-show="profileSaveButtonText == 'Saved'">
+                  <i class="fa fa-check"></i>
+                </span>
+                Saved
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="container">
+          <p class="settingsSubHead">Change your password</p>
+          <form ng-submit='changePassword()' class="settingsContent" role="form" ng-init="changePasswordForm = {}">
+            <table class="pull-left col-md-4 ">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td> </td>
+                  <td>
+                    <a class="pull-right settingsEdit" ng-click="passwordEditing=true" ng-hide="passwordEditing">show</a>
+                    <a class="pull-right settingsEdit" ng-click="passwordEditing=false" ng-show="passwordEditing">hide</a>
+                  </td>
+                </tr>
+                <tr ng-show="passwordEditing">
+                  <td>Old password</td>
+                  <td> </td>
+                  <td>
+                    <input type="password" class="form-control input-sm settingsInput" required="required" placeholder="Old password" ng-model="changePasswordForm.current_password">
+                  </td>
+                </tr>
+                <tr ng-show="passwordEditing">
+                  <td>New password</td>
+                  <td> </td>
+                  <td>
+                    <input type="password" class="form-control input-sm settingsInput" required="required" placeholder="New password" ng-model="changePasswordForm.password">
+                  </td>
+                </tr>
+                <tr ng-show="passwordEditing">
+                  <td>Confirm password</td>
+                  <td> </td>
+                  <td>
+                    <input type="password" class="form-control input-sm settingsInput" required="required" placeholder="Confirm new password" ng-model="changePasswordForm.password_confirmation">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="settingsButton" ng-show="passwordEditing">
+              <button class="btn btn-secondary btn-sm settingsButton" ng-show="passwordSaveButtonText !== 'Saved'" type="submit">
+                <span ng-show="passwordSaveButtonText == 'Loading'">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </span>
+                Save
+              </button>
+              <span ng-show="passwordSaveButtonText == 'Incorrect'" class="settingsErrorMessage">
+                <i class="fa fa-times"></i>
+                Error occured
+              </span>
+              <button type="button" class="btn btn-secondary btn-sm settingsButton fakeButton" ng-show="passwordSaveButtonText == 'Saved'">
+                <span ng-show="passwordSaveButtonText == 'Saved'">
+                  <i class="fa fa-check"></i>
+                </span>
+                Saved
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="container">
+          <p class="settingsSubHead">Notifications</p>
+          <form ng-submit='updateNotification()' class="settingsContent" role="form" >
+            <table class="pull-left col-md-8 ">
+              <tbody>
+                <tr class="settingsData">
+                  <td>
+                    <input type="checkbox" ng-model="userData.notification">
+                  </td>
+                  <td> </td>
+                  <td>Receive an email notification when someone sends you a request</td>
+                </tr>
+                <tr class="settingsData">
+                  <td>
+                    <input type="checkbox" ng-model="userData.newsletter">
+                  </td>
+                  <td> </td>
+                  <td>Subscribe to our newsletter and stay updated on the latest developments and special offers!</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="settingsButton">
+              <button class="btn btn-secondary btn-sm settingsButton" ng-show="notificationSaveButtonText !== 'Saved'" type="submit">
+                <span ng-show="notificationSaveButtonText == 'Loading'">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </span>
+                Save
+              </button>
+              <span ng-show="notificationSaveButtonText == 'Error'" class="settingsErrorMessage">
+                <i class="fa fa-times"></i>
+                Unknown error
+              </span>
+              <button type="button" class="btn btn-secondary btn-sm settingsButton fakeButton" ng-show="notificationSaveButtonText == 'Saved'">
+                <span ng-show="notificationSaveButtonText == 'Saved'">
+                  <i class="fa fa-check"></i>
+                </span>
+                Saved
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div ng-show="tab === 2">
+        <p class="settingsHead">About</p>
+        <div class="aboutContent">
+          <img id="aboutLogo" ng-src="<%= image_path('book-guy-logo-pic.gif') %>" alt="Image not found">
+          <div id="aboutDescription">
+            <p id="appName">Book Guy</p>
+            <p>A fast and simple book trading platform.</p>
+          </div>
+          <div class="aboutVersion">
+            Version 0.1.0 beta<br>
+            <a ng-href="mailto:xpp@me.com">
+              Report an issue
+            </a>
+          </div>
+          <div class="aboutFooter">
+            Book Guy<br>
+            Developed by <a href="https://github.com/kricli">Richard Li</a><br>
+            Copyright 2015 All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

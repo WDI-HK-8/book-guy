@@ -1,0 +1,45 @@
+app.controller('SettingsCtrl', ['$scope', '$http', '$location', '$route', '$auth', function($scope, $http, $location, $route, $auth){
+
+  var url = "<%= ENV['URL'] %>" || "http://localhost:3000";
+
+  $scope.authData = $auth.validateUser();
+  $scope.userData = $scope.authData.$$state.value
+  $scope.updateProfileForm = angular.copy($scope.userData)
+
+  $scope.changePassword = function () {
+    $scope.passwordSaveButtonText = 'Loading'
+    $auth.updatePassword($scope.changePasswordForm).
+      then(function(resp) {
+        $scope.passwordSaveButtonText = 'Saved'
+      }).
+      catch(function(resp) {
+        console.log(resp);
+        $scope.passwordSaveButtonText = 'Incorrect'
+      });
+  };
+
+  $scope.updateProfile = function() {
+    $auth.updateAccount($scope.updateProfileForm)
+      .then(function(resp) {
+        $scope.profileSaveButtonText = 'Saved'
+      }).
+      catch(function(resp) {
+        console.log(resp);
+        $scope.profileSaveButtonText = 'Error'
+      });
+  }
+
+  $scope.updateNotification = function() {
+    $auth.updateAccount($scope.userData)
+      .then(function(resp) {
+        $scope.notificationSaveButtonText = 'Saved'
+      }).
+      catch(function(resp) {
+        console.log(resp);
+        $scope.notificationSaveButtonText = 'Error'
+      });
+  }
+
+
+
+}]);

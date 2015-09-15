@@ -35,7 +35,10 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
 
       ## User Info
       t.string :name
-      t.string :nickname
+      t.string :first_name
+      t.string :last_name
+      t.boolean :notification, :default => true
+      t.boolean :newsletter, :default => true
       t.string :image
       t.string :email
 
