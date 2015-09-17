@@ -1,10 +1,33 @@
+<!-- <p>Welcome <%= @email %>!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}).html_safe %></p> -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-------------------------------
+  ___  _   _    _
+ /   || | | |  | |
+ \__  | | | |  | |  __
+ /    |/  |/_) |/  /  \_/\/
+ \___/|__/| \_/|__/\__/  /\_/
+               |\
+               |/
+Cam @ Elkfox.com
+http://experts.shopify.com/elkfox
+-------------------------------->
+
+<!-------------------------------
+NOTES:
+When you are ready to add this to your Shopify site. You should use http://zurb.com/ink/inliner.php to "inline" your code, so it works in email apps.
+-------------------------------->
 
 <head>
 <meta name="viewport" content="width=device-width" /><!-- IMPORTANT -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Request received</title>
+<title>Account Activation</title>
 
 <!-- <link rel="stylesheet" type="text/css" href="stylesheets/email.css" /> -->
 <style>
@@ -229,7 +252,7 @@
 					<table bgcolor="#ff4259">
 						<tr>
 							<td align="left">
-								<h6 class="collapse">You just received a request</h6>
+								<h6 class="collapse">Activate Your Account</h6>
 							</td>
 							<td align="right">
 							</td>
@@ -254,31 +277,29 @@
 				<tr>
 					<td>
 						<br/>
-						<h3>Hello, <%= @user.name %></h3>
-
-            <br/>
-            <br/>
-            <br/>
+						<h3>Dear customer,</h3>
 
 						<!-- You may like to include a Hero Image -->
-						<p align="middle"><img align="middle" src="<%= @book.thumbnail %>" alt="" /></p>
+						<p><img src="http://placekitten.com/g/600/300" alt="" /></p>
 						<!-- /Hero Image -->
 
 						<br/>
 
-            <p>
-              Just wanna let you know that someone is interested in buying your book <b><%= @book.title %></b>
-            </p>
-
-						<br/>
-
-            <p>
-              To contact the buyer, please login to your account and go to "My Requests".
-            </p>
+						<p>An account has been created for you. Please activate your account through the link below.</p>
 
 						<br>
 
+						<p style="text-align:center;">
+              <%= link_to 'Confirm my account', confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}).html_safe, :class => 'btn' %>
+						</p>
+
+						<p>If you haven't created this account, please just ignore this email. Sorry for any inconvenience that may occur.</p>
+
 						<br/>
+
+						<!-- <p><small>If you can't get the button to work, paste this link into your browser:  </small></p> -->
+
+						<!-- <%= confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}) %> -->
 
 					</td>
 				</tr>

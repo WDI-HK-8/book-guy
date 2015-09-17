@@ -174,7 +174,20 @@
                   <div class="editButtons pull-left">
                     <span><button class="btn btn-primary" type="button" ng-hide="editing" ng-click='editBook(item.id)'>Edit</button></span>
                     <span><button class="btn btn-primary" type="button" ng-show="editing" ng-click="stopEdit()">Cancel</button></span>
-                    <span><button class="btn btn-primary" type="submit" form="editForm" ng-show="editing">Save</button></span>
+                    <span ng-show="editing">
+                      <button class="btn btn-primary" ng-show="editButtonText !== 'Saved'" type="submit" form="editForm">
+                        <span ng-show="editButtonText == 'Loading'">
+                          <i class="fa fa-refresh fa-spin"></i>
+                        </span>
+                        Save
+                      </button>
+                      <button type="button" class="btn btn-primary fakeButton" ng-show="editButtonText == 'Saved'">
+                        <span ng-show="editButtonText == 'Saved'">
+                          <i class="fa fa-check"></i>
+                        </span>
+                        Saved
+                      </button>
+                    </span>
                     <span><button class="btn btn-primary btn-danger" ng-show="editing" ng-click='deleteBook(item.id)'>Delete this book</button></span>
                   </div>
                 </div>
@@ -204,28 +217,28 @@
               <td><strong>Title</strong></td>
               <td> </td>
               <td>
-                <input type="text" class="form-control input-sm" placeholder="Enter title" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
+                <input type="text" class="form-control input-sm" placeholder="Enter keywords.. hit enter, then pick a book!" ng-keypress="apiSearch($event,book.title)" ng-model="book.title">
               </td>
             </tr>
             <tr>
               <td><strong>ISBN 10</strong></td>
               <td> </td>
               <td>
-                <input type="text" class="form-control input-sm" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter isbn10" ng-model="book.isbn10">
+                <input type="text" class="form-control input-sm" ng-keypress="apiSearch($event,book.isbn10)" placeholder="Enter ISBN10.. hit enter, then pick a book!" ng-model="book.isbn10">
               </td>
             </tr>
             <tr>
               <td><strong>ISBN 13</strong></td>
               <td> </td>
               <td>
-                <input type="text" class="form-control input-sm" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter isbn13" ng-model="book.isbn13">
+                <input type="text" class="form-control input-sm" ng-keypress="apiSearch($event,book.isbn13)" placeholder="Enter ISBN13.. hit enter, then pick a book!" ng-model="book.isbn13">
               </td>
             </tr>
             <tr>
               <td><strong>Pick your book</strong></td>
               <td> </td>
               <td>
-                <select ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
+                <select id="selectBook" ng-model="book" ng-options="book.title + ' --' + book.publisher for book in books"> </select>
               </td>
             </tr>
             <tr>
@@ -309,7 +322,18 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" ng-click="form.create()" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" ng-show="createButtonText !== 'Saved'" ng-click="form.create()" type="button">
+          <span ng-show="createButtonText == 'Loading'">
+            <i class="fa fa-refresh fa-spin"></i>
+          </span>
+          Save
+        </button>
+        <button type="button" class="btn btn-primary fakeButton" ng-show="createButtonText == 'Saved'">
+          <span ng-show="createButtonText == 'Saved'">
+            <i class="fa fa-check"></i>
+          </span>
+          Saved
+        </button>
       </div>
     </div>
   </div>

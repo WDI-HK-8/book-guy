@@ -9,10 +9,6 @@ app.controller('MyRequestsCtrl', ['$scope', '$http', '$location', '$auth', '$fil
     $scope.dataIncomings = response.incomings
     $scope.outgoings = [].concat($scope.dataOutgoings);
     $scope.incomings = [].concat($scope.dataIncomings);
-
-    // console.log($scope.outgoings)
-
-    console.log($scope.incomings)
   });
 
 
