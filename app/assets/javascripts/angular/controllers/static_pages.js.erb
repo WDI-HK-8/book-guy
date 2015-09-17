@@ -1,7 +1,9 @@
 app.controller('StaticPagesCtrl', ['$scope', '$http', '$auth', '$location', '$filter', function($scope, $http, $auth, $location, $filter){
 
-  $scope.authData = $auth.validateUser();
-  $scope.userStatus = $scope.authData.$$state.status
+  $scope.userStatus = 2;
+  $auth.validateUser().then(function(response){
+    $scope.userStatus = 1;
+  });
 
   $scope.myInterval = 3000;
   $scope.noWrapSlides = false;
